@@ -2,29 +2,14 @@
 
 declare(strict_types=1);
 
-use App\Action\HealthAction;
+use App\Application\ContainerFactory;
+use App\Application\Kernel;
 use Dotenv\Dotenv;
-use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$root = dirname(__DIR__);
+Dotenv::createImmutable(dirname(__DIR__))->safeLoad();
 
-if (is_file($root . '/.env')) {
-    Dotenv::createImmutable($root)->safeLoad();
-}
-
-$app = AppFactory::create();
-
-$app->addRoutingMiddleware();
-$app->addBodyParsingMiddleware();
-
-$app->addErrorMiddleware(
-    filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOL),
-    true,
-    true
-);
-
-$app->get('/api/health', HealthAction::class);
-
-$app->run();
+ContainerFactory::create()
+    ->get(Kernel::class)
+    ->run();
