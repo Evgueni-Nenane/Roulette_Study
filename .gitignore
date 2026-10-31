@@ -1,0 +1,40 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# PHP
+/vendor/
+/backend/vendor/
+composer.phar
+
+# Node
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# Logs
+*.log
+logs/
+
+# Tests & coverage
+coverage/
+.phpunit.result.cache
+.phpunit.cache/
+playwright-report/
+test-results/
+
+# IDE / editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local runtime data
+/storage/
+/backend/storage/
